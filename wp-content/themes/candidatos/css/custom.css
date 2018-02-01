@@ -1,0 +1,70 @@
+body{
+	background: #eaeaea;
+}
+nav{
+	background: #be202d;
+}
+
+nav a, nav a:hover, nav a:visited {
+	color: #fff;
+}
+
+.side-nav a, .side-nav a:hover, .side-nav a:visited {
+	color: #000;
+}
+
+.custom-logo{
+	width: 150px;
+	height: auto;
+	margin-top: 5px;
+}
+
+/*Candidate-styles*/
+.candidate{
+	width: 100%;
+	height: 400px;
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+.candidate__image{
+	width: 100%;
+	height: 199px;
+	background: red;
+}
+
+.candidate__description{
+	padding: 8px 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.candidate__party{
+	color:#be202d;
+	font-weight: thin;
+	text-transform: uppercase;
+	margin: 0;
+	margin-bottom: 10px;
+
+}
+
+.candidate__title{
+	font-size: 18px;
+	font-weight: bold;
+	color:#444;
+	margin: 0;
+	line-height: 1.2;
+}
+
+.candidate__title:hover, .candidate__title:visited{
+	color:#444;
+} 
+
+@media only screen and (min-width: 993px){
+	.container{
+		width: 90%;
+	}
+}
