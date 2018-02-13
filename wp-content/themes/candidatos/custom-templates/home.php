@@ -1,52 +1,56 @@
 <?php 
 	/* Template Name: Home */ 
 	get_header( 'custom' );
+	
 
 ?>
 
 <div class="row">
 	<div class="col s12">
-		<h4 class="center-align">Conoce a los candidatos</h4>
+		<h4 class="center-align animated bounceInUp">Conoce a los candidatos</h4>
 	</div>
 </div>
 
 <div class="container">
 	<div class="row">
-		<div class="col s12 m6 l3">
-			
-			<div class="candidate hoverable">
-				<div class="candidate__image"></div>
-				<div class="candidate__description">
-					<p class="candidate__party">Morena</p>
-					<a href="" class="candidate__title">Andres Manuel López Obrador</a>
-				</div>
-			</div>
-		
-		</div>
 
-		<div class="col s12 m6 l3">
+		<!-- Candidatos Nacionales -->
+		<?php  
 			
-			<div class="candidate hoverable">
-				<div class="candidate__image"></div>
-			</div>
-		
-		</div>
 
-		<div class="col s12 m6 l3">
-			
-			<div class="candidate hoverable">
-				<div class="candidate__image"></div>
-			</div>
-		
-		</div>
+			$args = array(
+					'post_type'		=>	'candidato',
+					'tax_query' 	=> 	array(
+						array(
+							'taxonomy'	=>	'locacion',
+							'field'		=>	'slug',
+							'terms'		=>	'nacional',
+							'operator'	=>	'IN'
+						)
 
-		<div class="col s12 m6 l3">
+					)	
+				);
 			
-			<div class="candidate hoverable">
-				<div class="candidate__image"></div>
-			</div>
+			$filter_posts = new WP_Query($args); 
+			if( $filter_posts->have_posts() ):
+				while( $filter_posts->have_posts() ):
+					$filter_posts->the_post();
+					get_template_part( 'template-parts/content', 'card' );
+				endwhile;
+			endif;
+			
+			wp_reset_postdata(); 
+
+
+		?>
 		
-		</div>
+
+
+		
+
+		
+
+		
 			
 	</div>
 </div>

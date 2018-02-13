@@ -120,19 +120,31 @@ function candidatos_scripts() {
 	wp_register_style( 'custom-css', get_template_directory_uri().'/css/custom.css', null, false, 'all' );
 	wp_register_style( 'materialize-css', get_template_directory_uri().'/css/materialize.min.css', null, false, 'all' );
 	wp_register_style( 'icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', null, false, 'all' );
+	wp_register_style( 'animate', get_template_directory_uri().'/css/animate.css', null, false, 'all' );
+	wp_register_style( 'fontastic', 'https://file.myfontastic.com/mBECXfgiPWRQmkgkFoU4sc/icons.css', false, 'all' );
+	wp_register_style( 'sweet-css', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.min.css', false, 'all' );
 	
+	wp_register_script( 'sweet-js', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'materialize-js', get_template_directory_uri().'/js/materialize.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'init', get_template_directory_uri().'/js/init.js', array( 'jquery' ), false, false );
-
+	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
+	wp_register_script( 'geodecoder', 'http://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
+	
+	wp_enqueue_script( 'geodecoder' );
 	wp_enqueue_script( 'candidatos-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 	wp_enqueue_script( 'candidatos-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 	wp_enqueue_script( 'materialize-js' );
 	wp_enqueue_script( 'init' );
+	wp_enqueue_script( 'vote' );
+	wp_enqueue_script( 'sweet-js' );
 	
 	wp_enqueue_style( 'candidatos-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'materialize-css' );
 	wp_enqueue_style( 'custom-css' );
 	wp_enqueue_style( 'icons' );
+	wp_enqueue_style( 'animate' );
+	wp_enqueue_style( 'fontastic' );
+	wp_enqueue_style( 'sweet-css' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -180,3 +192,49 @@ function tec_custom_logo_output( $html ) {
 	return $html;
 }
 add_filter('get_custom_logo', 'tec_custom_logo_output', 10);
+
+
+// Function to load sticky script
+
+function tec_add_sticky(){
+	
+	$pages = array('single.php');
+
+	if ( is_single() ) {
+		
+		wp_register_script( 'sticky', get_bloginfo('template_url').'/js/sticky.js', array( 'jquery' ), false, false );
+		wp_enqueue_script( 'sticky' );
+	 }
+}
+
+add_action( 'wp_enqueue_scripts', 'tec_add_sticky');
+
+
+function tec_get_posts($category_sid,$limit){
+
+	$url = "https://seunonoticias.mx/wp-json/wp/v2/posts?categories=".$category_sid."&per_page=".$limit;
+	// echo $url;
+	
+	$curl = curl_init();
+
+
+	curl_setopt_array($curl, array(
+	  CURLOPT_URL => $url,
+	  CURLOPT_RETURNTRANSFER => true,
+	  CURLOPT_TIMEOUT => 30,
+	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  CURLOPT_CUSTOMREQUEST => "GET",
+	  CURLOPT_HTTPHEADER => array(
+	    "cache-control: no-cache"
+	  ),
+	));
+
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	$response = json_decode($response, true); //because of true, it's in an array
+	// echo 'Online: '. $response['players']['online'];
+	return $response;
+}

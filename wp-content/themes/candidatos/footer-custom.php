@@ -13,18 +13,20 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'candidatos' ) ); ?>"><?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'candidatos' ), 'WordPress' );
-			?></a>
-			<span class="sep"> | </span>
-			<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'candidatos' ), 'candidatos', '<a href="http://tecline.com.mx">Ivan Fuentes</a>' );
-			?>
-		</div><!-- .site-info -->
+	<footer id="colophon" class="footer__seuno row">
+		<div class="col s12 l6">
+			<p>SéunoNoticias</p>
+			<p>
+				ADVERTENCIA: Esta encuesta es de opinión, los porcentajes mostrados solo pueden resultar un indicador de estados de ánimo o nivel de aceptación de un candidato al momento de recabar esta información. Los resultados pueden cambiar al momento de la elección.
+			</p>
+
+			<p>
+				Esta encuesta es 100% digital, sólo se podrá votar una vez a la semana por cada dirección IP.Los votos dobles o de otros estados serán anulados. Su voto es 100% confidencial y los datos proporcionados sólo serán usados con fines informativos. ¡Tu voto es secreto!
+
+			</p>
+
+		</div>
+			
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
