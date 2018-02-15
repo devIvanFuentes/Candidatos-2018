@@ -695,6 +695,18 @@ nav a, nav a:hover, nav a:visited {
 }
 /*END footer*/
 
+/*Estilos para alerta de sweet alert*/
+.candidate__share-alert a{
+	color: #be202d;
+	font-size: 40px;
+	padding: 5px;
+}
+
+.candidate__share-alert a:hover, .candidate__share-alert a:visited{
+	color:#be202d;
+}
+
+
 
 @media only screen and (max-width: 600px){
 	.candidateHeader{

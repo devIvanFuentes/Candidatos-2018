@@ -33,6 +33,19 @@ function dwwp_meta_callback( $post ) {
 		</div>
 	</div>
 
+	<div class="meta-row">
+			<div class="meta-th">
+				<label for="category_slug" class="dwwp-row-title"><?php _e( 'Category Slug', 'wp-job-listing' ); ?></label>
+			</div>
+			<div class="meta-td">
+				<input type="text" class="dwwp-row-content" name="category_slug" id="category_slug"
+				value="<?php if ( ! empty ( $dwwp_stored_meta['category_slug'] ) ) {
+					echo esc_attr( $dwwp_stored_meta['category_slug'][0] );
+				} ?>"/>
+			</div>
+		</div>
+	</div>
+
 
 		<div class="meta-row">
 			<div class="meta-th">
@@ -73,6 +86,9 @@ function dwwp_meta_save( $post_id ) {
     }
     if ( isset( $_POST[ 'party_name' ] ) ) {
     	update_post_meta( $post_id, 'party_name', sanitize_text_field( $_POST[ 'party_name' ] ) );
+    }
+    if ( isset( $_POST[ 'category_slug' ] ) ) {
+    	update_post_meta( $post_id, 'category_slug', sanitize_text_field( $_POST[ 'category_slug' ] ) );
     }
     
 }

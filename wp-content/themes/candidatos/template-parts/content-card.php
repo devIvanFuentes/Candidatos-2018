@@ -2,9 +2,12 @@
 	$post_sid = get_the_ID();
 	$candidate_sid = get_post_meta( $post_sid, 'category_sid', true );
 	$party_name = get_post_meta( $post_sid, 'party_name', true );
+	$category_url = get_post_meta( $post_sid, 'category_slug', true );
+	$porcentaje = tec_get_percentage($post_sid,'Activo');
+
 ?>
 <div class="col s12 m6 l3">
-			
+
 			<div class="candidate hoverable animated fadeIn">
 				<div class="candidate__image" style=" background-image: url( <?php the_post_thumbnail_url( 'post-thumbnail' ); ?> ); ">
 					
@@ -20,7 +23,7 @@
 				</div>
 
 				<?php  
-					$news = tec_get_posts( $candidate_sid , 1); 
+					$news = tec_get_posts( $candidate_sid , 1);
 					foreach ($news as $new) {
 						$title = $new['title']['rendered'];
 						$image = $new['better_featured_image']['media_details']['sizes']['thumbnail']['source_url'];
@@ -35,22 +38,22 @@
 				
 				<div class="candidate__percent">
 					<div class="progress">
-						<div class="determinate" style="width: 70%"></div>
+						<div class="determinate" style="width: <?php echo $porcentaje[0]['porcentaje']; ?>%"></div>
 					</div>
-					<p class="candidate__percent__number">90%</p>
+					<p class="candidate__percent__number"><?php echo $porcentaje[0]['porcentaje'].'%'; ?></p>
 				</div>
 				
 
 				<div class="candidate__actions">
 					<div class="candidate__more__container">
-						<a candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+						<a candidate-url=" <?php the_permalink(); ?>" candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
 							Votar
 						</a>
 						
 					</div>
 
 					<div class="candidate__more__container">
-						<a class="icon-newspaper candidate__more__news">
+						<a href=" <?php echo $category_url; ?> " target="_blank" class="icon-newspaper candidate__more__news">
 							Más notas
 						</a>
 						

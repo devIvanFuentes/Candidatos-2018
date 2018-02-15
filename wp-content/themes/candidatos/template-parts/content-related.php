@@ -1,4 +1,7 @@
-<?php $post_sid = get_the_ID(); ?>
+<?php 
+	$post_sid = get_the_ID(); 
+	$porcentaje = tec_get_percentage($post_sid,'Activo'); 
+?>
 <div class="related__card hoverable">
 				<figure>
 					<img src=" <?php the_post_thumbnail_url('thumbnail'); ?> ">
@@ -15,15 +18,15 @@
 
 					<div class="without-left-padding candidate__percent">
 						<div class="progress">
-							<div class="determinate" style="width: 70%"></div>
+							<div class="determinate" style="width: <?php echo $porcentaje[0]['porcentaje']; ?>%"></div>
 						</div>
-						<p class="candidate__percent__number">90%</p>
+						<p class="candidate__percent__number"><?php echo $porcentaje[0]['porcentaje']; ?>%</p>
 					</div>
 
 
 					<div class="candidate__actions candidateHeader-actions">
 						<div class="candidate__more__container candidate__more__container-header">
-							<a candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+							<a candidate-url=" <?php the_permalink(); ?> " candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
 								Votar
 							</a>
 						

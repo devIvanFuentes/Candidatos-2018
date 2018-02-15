@@ -3,6 +3,7 @@ jQuery(document).ready(function( $ ) {
 	$('.btn__vote').click(function(e){
 		e.preventDefault();
 		var candidate_sid = $(this).attr('candidate-sid');
+		var candidate_url = $(this).attr('candidate-url');
 			
 
 		var geocoder;
@@ -12,7 +13,13 @@ jQuery(document).ready(function( $ ) {
         		navigator.geolocation.getCurrentPosition(showPosition,error);
     		} else {
         		// x.innerHTML = "Geolocation is not supported by this browser.";
-        		alert('Geolocation is not supported by this browser.');
+        		// alert('Geolocation is not supported by this browser.');
+        		
+        		swal({
+			  		type: 'error',
+			  		title: 'Oops...',
+			  		text: 'Tu navegador no soporta la geolocalizacion, actualizalo'
+				});
     		}
 		}
 
@@ -29,6 +36,11 @@ jQuery(document).ready(function( $ ) {
 
 		function error(){
 			alert('Para poder votar necesitamos conocer tu ubicacion');
+			swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'Para poder votar necesitamos conocer tu ubicacion'
+			});
 		}
 
 
@@ -71,22 +83,129 @@ jQuery(document).ready(function( $ ) {
         alert(city.short_name + " " + city.long_name);
         alert(state.short_name + " " + state.long_name);
         alert(country.short_name + " " + country.long_name);
+
+        // country.short_name = 'USA';
+
+        if( country.short_name != 'MX' ){
+        	swal(
+  				'Lo sentimos',
+  				'Solo usuarios de México pueden participar en esta encuesta',
+  				'error'
+			).then((result)=>{
+				swal({
+					  title: 'Comparte tu voto',
+					  html:
+					    `<div class="candidate__share-alert">
+							<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=${candidate_url}" class="icon-facebook-circled"> </a>
+							<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=${candidate_url}" class="icon-twitter-circled"></a>	
+						</div>`,
+					  showCloseButton: true,
+					  confirmButtonText:'Cerrar'
+					  
+					})
+			});
+        }else{
+
         // Obteniendo la ip
         $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
         	var ip = data['query'];
         	alert(ip);
-        	alert(candidate_sid);	
-        });
+        	alert(candidate_sid);
+
+        	// AJAX
+
+	        $.ajax({
+	               type : "post",
+	               url : url.ajax_url,
+	               data : {
+	               	  ciudad:city.long_name,
+	                  estado:state.short_name,
+	                  pais:country.short_name,
+	                  ip:ip,
+	                  candidate_sid:candidate_sid,
+	                  action: 'tec_insert_vote'
+	               },
+	               success: function(response) {
+
+	               	if( response['status'] != false ){
+	               		swal(
+  							'Excelente',
+  							'Tu voto ha sido registrado',
+  							'success'
+						).then((result)=>{
+							swal({
+					  			title: 'Comparte tu voto',
+					  			html:
+					    		`<div class="candidate__share-alert">
+									<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=${candidate_url}" class="icon-facebook-circled"> </a>
+									<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=${candidate_url}" class="icon-twitter-circled"></a>	
+								</div>`,
+					  			showCloseButton: true,
+					  			confirmButtonText:'Cerrar'
+					  
+							})
+						});
+	               	}else{
+	               		swal(
+  							'Lo sentimos',
+  							'Ya votaste en esta encuesta regresa la proxima semana',
+  							'error'
+						).then((result)=>{
+							swal({
+					  			title: 'Comparte tu voto',
+					  			html:
+					    		`<div class="candidate__share-alert">
+									<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=${candidate_url}" class="icon-facebook-circled"> </a>
+									<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=${candidate_url}" class="icon-twitter-circled"></a>	
+								</div>`,
+					  			showCloseButton: true,
+					  			confirmButtonText:'Cerrar'
+					  
+							})
+						});
+
+
+
+	               	}
+	                 
+
+	                  console.log(response);
+	               },
+	               error: function(response){
+	                   swal(
+	                     'Lo sentimos!',
+	                     'No se pudo procesar tu voto',
+	                     'error'
+	                  )
+	               }
+	         })
+
+	        // END AJAX	
+	        });
+
+    }
+
+        
 
 
 
 
         } else {
-          alert("No results found");
+          // alert("No results found");
+          swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'No se pudo registrar tu voto'
+			});
         }
       } else {
-        alert("Geocoder failed due to: " + status);
-      }
+        // alert("Geocoder failed due to: " + status);
+        swal({
+			  type: 'error',
+			  title: 'Oops...',
+			  text: 'No se pudo registrar tu voto'
+			});
+      	}
     });
   }
 

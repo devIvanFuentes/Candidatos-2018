@@ -127,8 +127,11 @@ function candidatos_scripts() {
 	wp_register_script( 'sweet-js', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'materialize-js', get_template_directory_uri().'/js/materialize.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'init', get_template_directory_uri().'/js/init.js', array( 'jquery' ), false, false );
-	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
 	wp_register_script( 'geodecoder', 'http://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
+	
+	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
+	$admin = array('ajax_url' => admin_url('admin-ajax.php') );
+	wp_localize_script( 'vote', 'url', $admin );
 	
 	wp_enqueue_script( 'geodecoder' );
 	wp_enqueue_script( 'candidatos-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
@@ -151,6 +154,119 @@ function candidatos_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'candidatos_scripts' );
+
+
+// FUNCION AJAX
+add_action( 'wp_ajax_nopriv_tec_insert_vote', 'tec_insert_vote' );
+add_action('wp_ajax_tec_insert_vote','tec_insert_vote');
+
+function tec_get_existing_vote($ip,$status){
+	global $wpdb;
+	$query = "
+		SELECT COUNT(user_ip) AS total_ip
+		FROM candidate_vote_b
+		WHERE poll_sid = (
+				SELECT poll_id
+				FROM poll_d
+				WHERE status_sid = (
+						SELECT status_id
+						FROM status_a
+						WHERE description = '$status'
+						)
+					AND user_ip = '$ip'
+				)
+	";
+
+	return $wpdb->get_results( $query, ARRAY_A );
+
+
+}
+
+function tec_get_poll_by_status($status){
+	global $wpdb;
+	$query="
+		SELECT poll_id
+		FROM poll_d
+		WHERE status_sid = (
+				SELECT status_id
+				FROM status_a
+				WHERE description = '$status'
+				)
+	";
+
+	return $wpdb->get_results( $query, ARRAY_A );
+}
+
+// Funcion para obtener el porcentaje de votos
+function tec_get_percentage($candidate_sid,$status){
+	global $wpdb;
+	$query = "
+		SELECT ROUND(
+		(
+			(
+				SELECT COUNT(*)
+				FROM candidate_vote_b
+				WHERE candidate_sid = $candidate_sid
+					AND poll_sid = (SELECT poll_id from poll_d WHERE status_sid = (SELECT status_id FROM status_a WHERE description = '$status'))
+				) * 100
+		) / COUNT(*), 0) AS porcentaje
+		FROM candidate_vote_b WHERE poll_sid = (SELECT poll_id from poll_d WHERE status_sid = (SELECT status_id FROM status_a WHERE description = '$status'))
+	";
+	return $wpdb->get_results( $query, ARRAY_A );
+}
+
+function tec_insert_vote(){
+
+	if ( isset( $_POST['ciudad'] ) ):
+		global $wpdb;
+		$ciudad = $_POST['ciudad'];
+		$estado = $_POST['estado'];
+		$pais = $_POST['pais'];
+		$ip = $_POST['ip'];
+		$candidate_sid = $_POST['candidate_sid'];
+		$date = date('Y-m-d');
+
+		// Verificar que no haya votado
+		$existing_vote = tec_get_existing_vote($ip,'Activo');
+		if( $existing_vote[0]['total_ip'] > 0 ):
+			wp_send_json( array(
+						'status' => __(0, 'wpduf') 
+						) 
+					);
+		else:
+			$poll_sid = tec_get_poll_by_status('Activo');
+			
+			$insert = $wpdb->insert(
+				'candidate_vote_b',
+				array(
+					'candidate_sid'		=> 	$candidate_sid,
+					'user_ip'			=>	$ip,
+					'user_country'		=>	$pais,
+					'user_state'		=>	$estado,
+					'user_municipality'	=>	$ciudad,
+					'vote_date'			=>	$date,
+					'poll_sid'			=>	$poll_sid[0]['poll_id']
+				),
+				array(
+					'%d',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%d'
+				)
+			);
+
+
+			wp_send_json( array(
+							'status' => __($insert, 'wpduf') 
+							) 
+						);
+			endif;
+	endif;
+	
+}
 
 /**
  * Implement the Custom Header feature.
