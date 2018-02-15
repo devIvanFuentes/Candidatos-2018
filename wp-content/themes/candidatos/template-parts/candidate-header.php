@@ -1,10 +1,10 @@
 <?php 
 	$post_sid = get_the_ID();
-	$porcentaje = tec_get_percentage($post_sid,'Activo'); 
+	$porcentaje = tec_get_percentage($post_sid,'Activo');
+
 ?>
 
 	<div class="candidateHeader">
-		
 		<div class="candidateHeader__image" style=" background-image: url( <?php echo the_post_thumbnail_url('full'); ?> ); ">
 			
 			<div class="candidateHeader__filter">
@@ -29,12 +29,18 @@
 
 		<div class="candidateHeader__statics">
 			<h5>Últimos resultados de la encuesa</h5>
-			<p>Encuesta del 29 de mayo al 30 de mayo del 2018</p>
+			<p>Encuesta del <?php echo $date[0]['start_date']; ?> al <?php echo $date[0]['end_date']; ?> </p>
 			<div class="candidateHeader__progress">
 				
-				<div class="pie-wrapper pie-wrapper--solid progress-<?php echo $porcentaje[0]['porcentaje']; ?>">
-	    			<span class="label"><?php echo $porcentaje[0]['porcentaje']; ?><span class="bigger">%</span></span>
-	  			</div>
+				
+
+	  			<div class="big c100 p<?php echo $porcentaje[0]['porcentaje']; ?>">
+				  <span><?php echo $porcentaje[0]['porcentaje']; ?>%</span>
+				  <div class="slice">
+				    <div class="bar"></div>
+				    <div class="fill"></div>
+				  </div>
+				</div>
 				
 			</div>
 

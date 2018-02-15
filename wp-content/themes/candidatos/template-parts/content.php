@@ -10,6 +10,7 @@
 $post_sid = get_the_ID();
 $candidate_sid = get_post_meta( $post_sid, 'category_sid', true );
 $terms = wp_get_post_terms( $post_sid, 'locacion' );
+$date = tec_get_poll_dates('Activo');
 
 // print_r($terms);
 
@@ -23,7 +24,9 @@ $term = $terms[0]->slug;
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php get_template_part( 'template-parts/candidate', 'header' ); ?>
+	<?php include(locate_template('template-parts/candidate-header.php')); 
+	// get_template_part( 'template-parts/candidate', 'header' ); 
+	?>
 
 	
 

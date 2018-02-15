@@ -215,6 +215,24 @@ function tec_get_percentage($candidate_sid,$status){
 	return $wpdb->get_results( $query, ARRAY_A );
 }
 
+// Function to get the date of a poll
+function tec_get_poll_dates($status){
+	global $wpdb;
+	$query = "
+		SELECT DATE_FORMAT(start_date, '%d,%m,%Y') AS start_date
+			,DATE_FORMAT(end_date, '%d,%m,%Y') AS end_date
+		FROM poll_d
+		WHERE status_sid = (
+				SELECT status_id
+				FROM status_a
+				WHERE description = '$status'
+				);
+
+	";
+
+	return $wpdb->get_results( $query, ARRAY_A );
+};
+
 function tec_insert_vote(){
 
 	if ( isset( $_POST['ciudad'] ) ):
@@ -319,11 +337,16 @@ function tec_add_sticky(){
 	if ( is_single() ) {
 		
 		wp_register_script( 'sticky', get_bloginfo('template_url').'/js/sticky.js', array( 'jquery' ), false, false );
+		wp_register_style( 'circle', get_bloginfo('template_url').'/css/circle.css', false, false, 'all' );
 		wp_enqueue_script( 'sticky' );
+		wp_enqueue_style( 'circle' );
 	 }
 }
 
 add_action( 'wp_enqueue_scripts', 'tec_add_sticky');
+
+// Funcion para cargar barra circular
+
 
 
 function tec_get_posts($category_sid,$limit){
