@@ -80,9 +80,9 @@ jQuery(document).ready(function( $ ) {
         }
 
         //city data
-        alert(city.short_name + " " + city.long_name);
-        alert(state.short_name + " " + state.long_name);
-        alert(country.short_name + " " + country.long_name);
+        // alert(city.short_name + " " + city.long_name);
+        // alert(state.short_name + " " + state.long_name);
+        // alert(country.short_name + " " + country.long_name);
 
         // country.short_name = 'USA';
 
@@ -109,8 +109,8 @@ jQuery(document).ready(function( $ ) {
         // Obteniendo la ip
         $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
         	var ip = data['query'];
-        	alert(ip);
-        	alert(candidate_sid);
+        	// alert(ip);
+        	// alert(candidate_sid);
 
         	// AJAX
 

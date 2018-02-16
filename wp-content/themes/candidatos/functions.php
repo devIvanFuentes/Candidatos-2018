@@ -215,6 +215,32 @@ function tec_get_percentage($candidate_sid,$status){
 	return $wpdb->get_results( $query, ARRAY_A );
 }
 
+// Function to get general percentage
+function tec_get_general_percentage($status){
+	global $wpdb;
+	$query = "
+		SELECT p.post_title as candidate
+			,ROUND((COUNT(candidate_sid) * 100) / (
+					SELECT COUNT(*)
+					FROM candidate_vote_b
+					), 0) AS percentage
+		FROM candidate_vote_b c
+		INNER JOIN wp_posts p ON c.candidate_sid = p.ID
+		WHERE c.poll_sid = (
+				SELECT poll_id
+				FROM poll_d
+				WHERE status_sid = (
+						SELECT status_id
+						FROM status_a
+						WHERE description = '$status'
+						)
+				)
+		GROUP BY c.candidate_sid;
+	";
+
+	return $wpdb->get_results( $query, ARRAY_A );
+}
+
 // Function to get the date of a poll
 function tec_get_poll_dates($status){
 	global $wpdb;
@@ -345,7 +371,21 @@ function tec_add_sticky(){
 
 add_action( 'wp_enqueue_scripts', 'tec_add_sticky');
 
-// Funcion para cargar barra circular
+
+
+// Funcion para cargar grafica general
+function tec_add_chart(){
+	$pages = array('home.php');
+	if( is_front_page() ):
+		wp_register_script( 'chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js', array( 'jquery' ), false, false );
+		wp_register_script( 'graph', get_bloginfo('template_url').'/js/graph.js' , array( 'jquery' ), false, false );
+
+		wp_enqueue_script( 'graph' );
+		wp_enqueue_script( 'chart-js' );
+	endif;
+}
+
+add_action( 'wp_enqueue_scripts', 'tec_add_chart');
 
 
 
