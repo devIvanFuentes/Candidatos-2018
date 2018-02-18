@@ -312,6 +312,8 @@ function tec_insert_vote(){
 	
 }
 
+
+
 /**
  * Implement the Custom Header feature.
  */
@@ -379,6 +381,9 @@ function tec_add_chart(){
 	if( is_front_page() ):
 		wp_register_script( 'chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js', array( 'jquery' ), false, false );
 		wp_register_script( 'graph', get_bloginfo('template_url').'/js/graph.js' , array( 'jquery' ), false, false );
+		$data_url = get_site_url().'/data';
+		$admin = array('ajax_url' => $data_url );
+		wp_localize_script( 'graph', 'url', $admin );
 
 		wp_enqueue_script( 'graph' );
 		wp_enqueue_script( 'chart-js' );

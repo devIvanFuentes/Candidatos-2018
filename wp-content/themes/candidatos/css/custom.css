@@ -12,6 +12,10 @@ nav{
 	margin-top: 64px;
 }
 
+#sidenav-overlay{
+	z-index: 0 !important;
+}
+
 
 .without-left-padding{
 	padding-left: 0; 
@@ -529,6 +533,11 @@ nav a, nav a:hover, nav a:visited {
 	}
 	.candidateHeader__image, .candidateHeader__statics{
 		width: 100%;
+	}
+
+	/*sricky bar*/
+	#content{
+		margin-top: 56px;
 	}
 }
 
