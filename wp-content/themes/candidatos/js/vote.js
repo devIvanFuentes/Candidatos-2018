@@ -105,11 +105,15 @@ jQuery(document).ready(function( $ ) {
 					})
 			});
         }else{
+        console.log('obteniendo la ip');
 
         // Obteniendo la ip
-        $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
-        	var ip = data['query'];
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(data) {
+        	console.log('entando a la ip');
+        	console.log(data.ip);
+        	var ip = data.ip;
         	// alert(ip);
+        	// console.log(ip);
         	// alert(candidate_sid);
 
         	// AJAX
@@ -126,6 +130,7 @@ jQuery(document).ready(function( $ ) {
 	                  action: 'tec_insert_vote'
 	               },
 	               success: function(response) {
+	               	console.log(response);
 
 	               	if( response['status'] != false ){
 	               		swal(
@@ -143,7 +148,9 @@ jQuery(document).ready(function( $ ) {
 					  			showCloseButton: true,
 					  			confirmButtonText:'Cerrar'
 					  
-							})
+							}).then((result)=>{
+								location.reload();
+							});
 						});
 	               	}else{
 	               		swal(

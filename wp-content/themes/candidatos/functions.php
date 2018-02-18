@@ -127,7 +127,7 @@ function candidatos_scripts() {
 	wp_register_script( 'sweet-js', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'materialize-js', get_template_directory_uri().'/js/materialize.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'init', get_template_directory_uri().'/js/init.js', array( 'jquery' ), false, false );
-	wp_register_script( 'geodecoder', 'http://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
+	wp_register_script( 'geodecoder', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
 	
 	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
 	$admin = array('ajax_url' => admin_url('admin-ajax.php') );
@@ -390,7 +390,7 @@ function tec_add_chart(){
 	endif;
 }
 
-add_action( 'wp_enqueue_scripts', 'tec_add_chart');
+// add_action( 'wp_enqueue_scripts', 'tec_add_chart');
 
 
 

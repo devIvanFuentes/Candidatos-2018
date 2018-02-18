@@ -6,6 +6,8 @@
 ?>
 
 <div class="row">
+	<!-- 
+
 	<div class="col s12">
 		<h4 class="center-align animated bounceInUp">Elecciones 2018 #SéUnoNoticias</h4>
 		<p class="center-align animated bounceInUp">Siesta semana fueran las elecciones, ¿Por qué candidato votarías?</p>
@@ -14,6 +16,7 @@
 	<div id="chart-container">
 			<canvas id="mycanvas" width="100%" height="200px"></canvas>
 	</div>
+	 -->
 
 	<div class="col s12">
 		<h4 class="center-align animated bounceInUp">Conoce a los candidatos</h4>
