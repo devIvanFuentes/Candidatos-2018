@@ -33,6 +33,7 @@
 
 			$args = array(
 					'post_type'		=>	'candidato',
+					'orderby' 		=> 	'rand',
 					'tax_query' 	=> 	array(
 						array(
 							'taxonomy'	=>	'locacion',

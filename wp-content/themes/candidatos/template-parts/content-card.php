@@ -18,10 +18,17 @@
 
 				</div>
 				<div class="candidate__description">
-					<p class="candidate__party"><?php echo $party_name; ?></p>
+					<!-- <p class="candidate__party"><?php echo $party_name; ?></p> -->
 					<a href=" <?php the_permalink(  ); ?> " class="candidate__title"> <?php the_title(); ?> </a>
 				</div>
 
+				<div class="candidate__percent">
+					<div class="progress">
+						<div class="determinate" style="width: <?php echo $porcentaje[0]['porcentaje']; ?>%"></div>
+					</div>
+					<p class="candidate__percent__number"><?php echo $porcentaje[0]['porcentaje'].'%'; ?></p>
+				</div>
+				
 				<?php  
 					$news = tec_get_posts( $candidate_sid , 1);
 					foreach ($news as $new) {
@@ -36,12 +43,6 @@
 				
 
 				
-				<div class="candidate__percent">
-					<div class="progress">
-						<div class="determinate" style="width: <?php echo $porcentaje[0]['porcentaje']; ?>%"></div>
-					</div>
-					<p class="candidate__percent__number"><?php echo $porcentaje[0]['porcentaje'].'%'; ?></p>
-				</div>
 				
 
 				<div class="candidate__actions">

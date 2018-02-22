@@ -422,3 +422,48 @@ function tec_get_posts($category_sid,$limit){
 	// echo 'Online: '. $response['players']['online'];
 	return $response;
 }
+
+// Function to get all the polls
+function tec_get_all_polls(){
+	
+	global $wpdb;
+	$query="SELECT * FROM poll_d";
+	return $wpdb->get_results( $query , OBJECT);
+}
+
+// Function to get the votes by candidate of a poll
+function tec_get_candidate_votes($poll_sid){
+	global $wpdb;
+	$query="
+		SELECT 
+			c.candidate_sid,
+			p.post_title,
+			count(c.candidate_sid) AS total
+		FROM candidate_vote_b c
+		INNER JOIN wp_posts p ON p.ID = c.candidate_sid
+		WHERE poll_sid = $poll_sid
+		GROUP BY candidate_sid
+		ORDER BY total DESC
+			";
+	return $wpdb->get_results( $query, OBJECT );
+}
+
+// Function to get votes of a candidate by municipality (state error insert)
+
+function tec_get_candidate_votes_by_municipality($candidate_sid,$poll_sid){
+	
+	global $wpdb;
+	
+	$query = "
+		SELECT user_municipality
+			,user_state
+			,COUNT(user_state) AS total
+		FROM candidate_vote_b
+		WHERE candidate_sid = $candidate_sid
+			AND poll_sid = $poll_sid
+		GROUP BY user_state
+	";
+
+	return $wpdb->get_results( $query, OBJECT );
+
+}
