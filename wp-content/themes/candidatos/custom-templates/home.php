@@ -19,7 +19,7 @@
 	 -->
 
 	<div class="col s12">
-		<h4 class="center-align animated bounceInUp">Conoce a los candidatos</h4>
+		<h4 class="center-align animated bounceInUp title">Conoce a los candidatos</h4>
 	</div>
 
 </div>
@@ -59,7 +59,16 @@
 		?>
 		
 
+		<div class="col s12">
+			<h4 class="center-align animated bounceInUp title">
+				Últimas noticias #elecciones 2018
+			</h4>
+		</div>
 
+		<?php 
+
+			get_template_part( 'template-parts/content', 'latestNews' );
+		 ?>
 		
 
 		

@@ -8,6 +8,15 @@ nav{
 	z-index: 1;
 }
 
+.title{
+	font-weight: bold;
+}
+
+.center-image{
+	display: block;
+	margin:0 auto;
+}
+
 #content{
 	margin-top: 64px;
 }
