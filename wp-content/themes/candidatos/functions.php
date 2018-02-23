@@ -469,3 +469,16 @@ function tec_get_candidate_votes_by_municipality($candidate_sid,$poll_sid){
 	return $wpdb->get_results( $query, OBJECT );
 
 }
+
+// Function to change te redirect of the custom logo
+add_filter( 'get_custom_logo', 'tec_change_logo_url' );
+
+function tec_change_logo_url($html){
+
+	$new_logo_url = 'https://seunonoticias.mx/';
+
+	$search  = sprintf( '<a href="%s"', esc_url( home_url( '/' ) ) );
+	$replace = sprintf( '<a target="_blank" href="%s"', esc_url( $new_logo_url ) );
+
+	return str_replace( $search, $replace, $html );	
+}
