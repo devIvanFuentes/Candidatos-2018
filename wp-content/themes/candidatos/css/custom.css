@@ -81,6 +81,20 @@ nav a, nav a:hover, nav a:visited {
 
 }
 
+.candidate__party__image{
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 100%;
+	left:10px;
+	transform: translateY(-95%);
+}
+
+.candidate__party__image img{
+	width: 50px;
+	height: 50px;
+}
+
 .candidate__title{
 	font-size: 18px;
 	font-weight: bold;

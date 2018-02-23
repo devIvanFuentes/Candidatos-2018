@@ -4,6 +4,9 @@
 	$party_name = get_post_meta( $post_sid, 'party_name', true );
 	$category_url = get_post_meta( $post_sid, 'category_slug', true );
 	$porcentaje = tec_get_percentage($post_sid,'Activo');
+	$party_sid = get_post_meta( $post_sid, 'second_featured_image', true );
+	$party_image = wp_get_attachment_thumb_url( $party_sid );
+
 
 ?>
 <div class="col s12 m6 l3">
@@ -11,6 +14,10 @@
 			<div class="candidate hoverable animated fadeIn">
 				<div class="candidate__image" style=" background-image: url( <?php the_post_thumbnail_url( 'post-thumbnail' ); ?> ); ">
 					
+					<figure class="candidate__party__image">
+						<img src="<?php echo $party_image; ?>">
+					</figure>
+
 					<div class="candidate__share">
 						<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink();  ?>" class="icon-facebook-circled"> </a>
 						<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=<?php the_permalink();  ?>" class="icon-twitter-circled"></a>	
