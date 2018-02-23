@@ -38,11 +38,22 @@ nav a, nav a:hover, nav a:visited {
 	color: #000;
 }
 
+/*navbar*/
+.social__media__header li a{
+	font-size: 25px;
+	padding: 0 10px;
+}
+.nav-wrapper .button-collapse{
+	display: initial;
+}
+/*End navbar*/
+
 .custom-logo{
 	width: 150px;
 	height: auto;
 	margin-top: 5px;
 }
+
 
 /*Candidate-styles*/
 .candidate{

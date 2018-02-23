@@ -30,11 +30,11 @@
 				</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				
-				<ul class="right hide-on-med-and-down">
-					<li><a href="sass.html">Sass</a></li>
-					<li><a href="badges.html">Components</a></li>
-					<li><a href="collapsible.html">Javascript</a></li>
-					<li><a href="mobile.html">Mobile</a></li>
+				<ul class="right hide-on-med-and-down social__media__header">
+					<li><a class="icon-facebook" href="sass.html"></a></li>
+					<li><a class="icon-twitter" href="badges.html"></a></li>
+					<li><a class="icon-youtube" href="collapsible.html"></a></li>
+					<li><a class="icon-instagram" href="mobile.html"></a></li>
       			</ul>
       
       			<ul class="side-nav" id="mobile-demo">
