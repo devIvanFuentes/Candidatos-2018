@@ -38,10 +38,19 @@
       			</ul>
       
       			<ul class="side-nav" id="mobile-demo">
-					<li><a href="sass.html">Sass</a></li>
-					<li><a href="badges.html">Components</a></li>
-					<li><a href="collapsible.html">Javascript</a></li>
-					<li><a href="mobile.html">Mobile</a></li>
+					<li><a href="<?php echo get_home_url(); ?>">Inicio</a></li>
+					<li><a href="#">Encuestas</a></li>
+					<div class="subitems">
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Nacional</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Jalisco</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Guanajuato</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">CDMX</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Puebla</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Tabasco</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Chiapas</a></li>
+						<li><a href="<?php echo get_home_url().'/locacion/nacional/'; ?>">Yucatan</a></li>
+					</div>
+
       			</ul>
     		</div>
   		</nav>

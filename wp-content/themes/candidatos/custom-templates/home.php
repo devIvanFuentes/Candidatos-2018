@@ -17,6 +17,15 @@
 			<canvas id="mycanvas" width="100%" height="200px"></canvas>
 	</div>
 	 -->
+	 <!-- <div id="vmap" style="width: 100%; height: 450px;"></div> -->
+
+
+	 	<?php 
+	 		echo do_shortcode('[mapsvg id="53"]');
+	 	 ?>
+
+
+
 
 	<div class="col s12">
 		<h4 class="center-align animated bounceInUp title">Conoce a los candidatos</h4>

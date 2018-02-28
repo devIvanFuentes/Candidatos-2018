@@ -384,11 +384,27 @@ function tec_add_chart(){
 		// $data_url = get_site_url().'/data';
 		// $admin = array('ajax_url' => $data_url );
 		// wp_localize_script( 'graph', 'url', $admin );
+		// jvector
+	
+		wp_register_style( 'jvector-css',  get_bloginfo('template_url').'/css/vectormap.css', false, false, 'all' );
+		wp_register_script( 'jvector-js',  get_bloginfo('template_url').'/js/vectormap.js' , array( 'jquery' ), false, false );
+		wp_register_script( 'map', get_bloginfo('template_url').'/js/map.js', array( 'jquery' ), false, false );
+		
+
+		// mapbox 
+		/*
+		wp_register_style( 'mapbox-css', 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css', false, false, 'all' );
+		wp_register_script( 'mapbox-js', 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js' , array( 'jquery' ), false, false );
+		*/
+
 		wp_register_script( 'latest-api', get_bloginfo('template_url').'/js/latest-api.js' , array( 'jquery' ), false, false );
 
 		// wp_enqueue_script( 'graph' );
 		// wp_enqueue_script( 'chart-js' );
+		// wp_enqueue_style( 'jvector-css' );
 		wp_enqueue_script( 'latest-api' );
+		// wp_enqueue_script( 'jvector-js' );
+		// wp_enqueue_script( 'map' );
 	endif;
 }
 

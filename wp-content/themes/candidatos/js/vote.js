@@ -86,25 +86,12 @@ jQuery(document).ready(function( $ ) {
 
         // country.short_name = 'USA';
 
-        if( country.short_name != 'MX' ){
-        	swal(
-  				'Lo sentimos',
-  				'Solo usuarios de México pueden participar en esta encuesta',
-  				'error'
-			).then((result)=>{
-				swal({
-					  title: 'Comparte tu voto',
-					  html:
-					    `<div class="candidate__share-alert">
-							<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=${candidate_url}" class="icon-facebook-circled"> </a>
-							<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=${candidate_url}" class="icon-twitter-circled"></a>	
-						</div>`,
-					  showCloseButton: true,
-					  confirmButtonText:'Cerrar'
-					  
-					})
-			});
-        }else{
+        console.log('Ciudad: ' + city.long_name);
+  		console.log('Estaod: ' + state.short_name );
+  		console.log('Pais: ' + country.short_name);
+	                  
+
+       
         console.log('obteniendo la ip');
 
         // Obteniendo la ip
@@ -190,7 +177,7 @@ jQuery(document).ready(function( $ ) {
 	        // END AJAX	
 	        });
 
-    }
+    
 
         
 

@@ -92,6 +92,7 @@ function dwwp_register_taxonomy() {
 	$args = array(
 		'hierarchical'          => true,
         'labels'                => $labels,
+        'show_in_nav_menus'     => true,
         'show_ui'               => true,
         'show_admin_column'     => true,
         'update_count_callback' => '_update_post_term_count',

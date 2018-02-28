@@ -38,6 +38,19 @@ nav a, nav a:hover, nav a:visited {
 	color: #000;
 }
 
+/*Menu*/
+.subitems{
+	width: 100%;
+	padding-left: 15px;
+}
+/*END menu*/
+
+/*Mapa*/
+.jvectormap-container svg{
+	height: 100%;
+}
+/*End mapa*/
+
 /*navbar*/
 .social__media__header li a{
 	font-size: 25px;
