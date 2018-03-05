@@ -59,15 +59,15 @@ jQuery(document).ready(function( $ ) {
             //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
                 if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
                     //this is the object you are looking for
-                    city= results[0].address_components[i];
-                    console.log(city);
+                    state= results[0].address_components[i];
+                    console.log(state);
                     console.log('posicion:' + i);
                     // break;
                 }
 
                 if (results[0].address_components[i].types[b] == "locality") {
                     //this is the object you are looking for
-                    state= results[0].address_components[i];
+                    city= results[0].address_components[i];
                     // break;
                 }
 
@@ -87,7 +87,7 @@ jQuery(document).ready(function( $ ) {
         // country.short_name = 'USA';
 
         console.log('Ciudad: ' + city.long_name);
-  		console.log('Estaod: ' + state.short_name );
+  		console.log('Estado: ' + state.long_name );
   		console.log('Pais: ' + country.short_name);
 	                  
 

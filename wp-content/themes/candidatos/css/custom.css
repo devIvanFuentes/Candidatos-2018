@@ -1,5 +1,6 @@
 body{
 	background: #eaeaea;
+	overflow-x:hidden;
 }
 nav{
 	background: #be202d;
@@ -43,6 +44,25 @@ nav a, nav a:hover, nav a:visited {
 	width: 100%;
 	padding-left: 15px;
 }
+/*Redes sociales menu*/
+.social__media__menu{
+	width: 80%;
+	height: auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0 auto;
+}
+.social__media__menu a{
+	font-size: 25px;
+}
+
+.social__media__menu input{
+	margin: 0;
+}
+
+
+
 /*END menu*/
 
 /*Mapa*/

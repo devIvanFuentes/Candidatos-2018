@@ -7,10 +7,12 @@
  * @package candidatos
  */
 
-get_header(); ?>
-
+get_header('custom'); ?>
+	
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main">
+			<div class="container">
+				<div class="row">
 
 		<?php
 		if ( have_posts() ) : ?>
@@ -18,7 +20,7 @@ get_header(); ?>
 			<header class="page-header">
 				<h1 class="page-title"><?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'candidatos' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( 'Resultados para: %s', 'candidatos' ), '<span>' . get_search_query() . '</span>' );
 				?></h1>
 			</header><!-- .page-header -->
 
@@ -31,7 +33,7 @@ get_header(); ?>
 				 * If you want to overload this in a child theme then include a file
 				 * called content-search.php and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content', 'search' );
+				get_template_part( 'template-parts/content', 'card' );
 
 			endwhile;
 
@@ -42,10 +44,11 @@ get_header(); ?>
 			get_template_part( 'template-parts/content', 'none' );
 
 		endif; ?>
-
+				</div>
+			</div>
 		</main><!-- #main -->
 	</section><!-- #primary -->
 
 <?php
 get_sidebar();
-get_footer();
+get_footer('custom');

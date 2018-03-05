@@ -123,10 +123,12 @@ function candidatos_scripts() {
 	wp_register_style( 'animate', get_template_directory_uri().'/css/animate.css', null, false, 'all' );
 	wp_register_style( 'fontastic', 'https://file.myfontastic.com/mBECXfgiPWRQmkgkFoU4sc/icons.css', false, 'all' );
 	wp_register_style( 'sweet-css', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.min.css', false, 'all' );
+	wp_register_style( 'ticker', get_template_directory_uri().'/css/ticker.css', false, 'all' );
 	
 	wp_register_script( 'sweet-js', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'materialize-js', get_template_directory_uri().'/js/materialize.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'init', get_template_directory_uri().'/js/init.js', array( 'jquery' ), false, false );
+	wp_register_script( 'ticker-js', get_template_directory_uri().'/js/jquery.tickerNews.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'geodecoder', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
 	
 	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
@@ -134,6 +136,7 @@ function candidatos_scripts() {
 	wp_localize_script( 'vote', 'url', $admin );
 	
 	wp_enqueue_script( 'geodecoder' );
+	wp_enqueue_script( 'ticker-js' );
 	wp_enqueue_script( 'candidatos-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 	wp_enqueue_script( 'candidatos-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 	wp_enqueue_script( 'materialize-js' );
@@ -148,6 +151,7 @@ function candidatos_scripts() {
 	wp_enqueue_style( 'animate' );
 	wp_enqueue_style( 'fontastic' );
 	wp_enqueue_style( 'sweet-css' );
+	wp_enqueue_style( 'ticker' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
