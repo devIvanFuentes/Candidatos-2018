@@ -6,6 +6,9 @@
 	$porcentaje = tec_get_percentage($post_sid,'Activo');
 	$party_sid = get_post_meta( $post_sid, 'second_featured_image', true );
 	$party_image = wp_get_attachment_thumb_url( $party_sid );
+	$location = wp_get_post_terms( $post_sid, 'locacion', $args );
+	// print_r($location);
+	$location_name = $location[0]->name;
 
 
 ?>
@@ -54,7 +57,7 @@
 
 				<div class="candidate__actions">
 					<div class="candidate__more__container">
-						<a candidate-url=" <?php the_permalink(); ?>" candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+						<a candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
 							Votar
 						</a>
 						

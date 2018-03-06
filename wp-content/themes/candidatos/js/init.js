@@ -2,6 +2,7 @@ jQuery(document).ready(function( $ ) {
 
 	$(".button-collapse").sideNav();
 
+  // Obteniendo localización para mostrar alertas
 	// BREAKING NEWS
 	$.getJSON("https://seunonoticias.mx/wp-json/wp/v2/posts?categories=10681&per_page=10", function(data) {
 
@@ -27,5 +28,8 @@ jQuery(document).ready(function( $ ) {
 
         //$('.ti_content').css('display','block');
       });
+
+
+
  
 });

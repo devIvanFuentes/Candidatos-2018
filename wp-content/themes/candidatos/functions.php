@@ -164,7 +164,7 @@ add_action( 'wp_enqueue_scripts', 'candidatos_scripts' );
 add_action( 'wp_ajax_nopriv_tec_insert_vote', 'tec_insert_vote' );
 add_action('wp_ajax_tec_insert_vote','tec_insert_vote');
 
-function tec_get_existing_vote($ip,$status){
+function tec_get_existing_vote($ip,$status,$location_sid){
 	global $wpdb;
 	$query = "
 		SELECT COUNT(user_ip) AS total_ip
@@ -178,6 +178,7 @@ function tec_get_existing_vote($ip,$status){
 						WHERE description = '$status'
 						)
 					AND user_ip = '$ip'
+					AND location_sid = $location_sid
 				)
 	";
 
@@ -186,7 +187,43 @@ function tec_get_existing_vote($ip,$status){
 
 }
 
-function tec_get_poll_by_status($status){
+//Function to get the location sid
+function tec_get_location_sid($term){
+	global $wpdb;
+	$query = "
+		SELECT term_id FROM wp_terms WHERE name = '$term'
+	";
+	return $wpdb->get_results( $query, ARRAY_A );
+}
+
+// Function to get all the taxonomies
+function tec_get_all_taxonomies($taxonomy){
+	global $wpdb;
+	$query = "
+		SELECT l.term_id , l.name 
+			from wp_term_taxonomy t
+    		JOIN wp_terms l ON t.term_id = l.term_id
+    		WHERE t.taxonomy = '$taxonomy'
+	";
+
+	return $wpdb->get_results( $query );
+}
+
+// Function to chek if a taxonomy exist
+function tec_validate_taxonomy( $taxonomy, $term ){
+	global $wpdb;
+	$query = "
+	SELECT COUNT(l.term_id) as total_taxonomy 
+		from wp_term_taxonomy t
+    	JOIN wp_terms l ON t.term_id = l.term_id
+    	WHERE t.taxonomy = '$taxonomy'
+    	AND l.name = '$term'
+	";
+
+	return $wpdb->get_results( $query, ARRAY_A );
+}
+
+function tec_get_poll_by_status($status,$location_sid){
 	global $wpdb;
 	$query="
 		SELECT poll_id
@@ -196,6 +233,7 @@ function tec_get_poll_by_status($status){
 				FROM status_a
 				WHERE description = '$status'
 				)
+		AND location_sid = $location_sid
 	";
 
 	return $wpdb->get_results( $query, ARRAY_A );
@@ -266,54 +304,78 @@ function tec_get_poll_dates($status){
 function tec_insert_vote(){
 
 	if ( isset( $_POST['ciudad'] ) ):
+		
 		global $wpdb;
+		// Validando la ciudad
+		$term = $_POST['term'];
 		$ciudad = $_POST['ciudad'];
 		$estado = $_POST['estado'];
 		$pais = $_POST['pais'];
 		$ip = $_POST['ip'];
 		$candidate_sid = $_POST['candidate_sid'];
 		$date = date('Y-m-d');
-
-		// Verificar que no haya votado
-		$existing_vote = tec_get_existing_vote($ip,'Activo');
-		if( $existing_vote[0]['total_ip'] > 0 ):
-			wp_send_json( array(
-						'status' => __(0, 'wpduf') 
-						) 
-					);
+		$location_sid = tec_get_location_sid($term);
+		$poll_sid = tec_get_poll_by_status('Activo',$location_sid[0]['term_id']);
+		
+		if ( $term != 'Nacional' ):
+			//validar que sea igual el termino con la ciudad
+			if ( $term == $estado ):
+				tec_register_vote($candidate_sid,$ip,$pais,$estado,$ciudad,$date,$poll_sid,$location_sid[0]['term_id']);
+			else:
+				wp_send_json( array(
+						'status' => __('ciudad', 'wpduf') 
+					) 
+				);
+			endif; 		
 		else:
-			$poll_sid = tec_get_poll_by_status('Activo');
-			
-			$insert = $wpdb->insert(
-				'candidate_vote_b',
-				array(
-					'candidate_sid'		=> 	$candidate_sid,
-					'user_ip'			=>	$ip,
-					'user_country'		=>	$pais,
-					'user_state'		=>	$estado,
-					'user_municipality'	=>	$ciudad,
-					'vote_date'			=>	$date,
-					'poll_sid'			=>	$poll_sid[0]['poll_id']
-				),
-				array(
-					'%d',
-					'%s',
-					'%s',
-					'%s',
-					'%s',
-					'%s',
-					'%d'
-				)
-			);
 
+			tec_register_vote($candidate_sid,$ip,$pais,$estado,$ciudad,$date,$poll_sid,$location_sid[0]['term_id']);
 
-			wp_send_json( array(
-							'status' => __($insert, 'wpduf') 
-							) 
-						);
 			endif;
 	endif;
 	
+}
+
+function tec_register_vote($candidate_sid,$ip,$pais,$estado,$ciudad,$date,$poll_sid,$location_sid){
+	global $wpdb;
+	// Verificar que no haya votado
+	$existing_vote = tec_get_existing_vote($ip,'Activo',$location_sid);
+	if( $existing_vote[0]['total_ip'] > 0 ):
+		wp_send_json( array(
+						'status' => __(0, 'wpduf') 
+					) 
+		);
+	else:
+		
+		// global $wpdb;
+		$insert = $wpdb->insert(
+		'candidate_vote_b',
+		array(
+			'candidate_sid'		=> 	$candidate_sid,
+			'user_ip'			=>	$ip,
+			'user_country'		=>	$pais,
+			'user_state'		=>	$estado,
+			'user_municipality'	=>	$ciudad,
+			'vote_date'			=>	$date,
+			'poll_sid'			=>	$poll_sid[0]['poll_id']
+		),
+		array(
+			'%d',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%d'
+			)
+		);
+
+
+		wp_send_json( array(
+			'status' => __($insert, 'wpduf') 
+			) 
+		);
+	endif;
 }
 
 

@@ -4,6 +4,7 @@ jQuery(document).ready(function( $ ) {
 		e.preventDefault();
 		var candidate_sid = $(this).attr('candidate-sid');
 		var candidate_url = $(this).attr('candidate-url');
+		var term = $(this).attr('location-name');
 			
 
 		var geocoder;
@@ -89,11 +90,12 @@ jQuery(document).ready(function( $ ) {
         console.log('Ciudad: ' + city.long_name);
   		console.log('Estado: ' + state.long_name );
   		console.log('Pais: ' + country.short_name);
-	                  
+	    
+
 
        
         console.log('obteniendo la ip');
-
+        
         // Obteniendo la ip
         $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(data) {
         	console.log('entando a la ip');
@@ -110,16 +112,17 @@ jQuery(document).ready(function( $ ) {
 	               url : url.ajax_url,
 	               data : {
 	               	  ciudad:city.long_name,
-	                  estado:state.short_name,
+	                  estado:state.long_name,
 	                  pais:country.short_name,
 	                  ip:ip,
 	                  candidate_sid:candidate_sid,
+	                  term:term,
 	                  action: 'tec_insert_vote'
 	               },
 	               success: function(response) {
 	               	console.log(response);
 
-	               	if( response['status'] != false ){
+	               	if( response['status'] == 1 ){
 	               		swal(
   							'Excelente',
   							'Tu voto ha sido registrado',
@@ -139,6 +142,13 @@ jQuery(document).ready(function( $ ) {
 								location.reload();
 							});
 						});
+	               	}else if( response['status'] == 'ciudad' ){
+	               		swal(
+  							'Lo sentimos',
+  							'No puedes participar en esta encuesta',
+  							'error'
+						)
+
 	               	}else{
 	               		swal(
   							'Lo sentimos',
@@ -157,13 +167,8 @@ jQuery(document).ready(function( $ ) {
 					  
 							})
 						});
-
-
-
 	               	}
 	                 
-
-	                  console.log(response);
 	               },
 	               error: function(response){
 	                   swal(
