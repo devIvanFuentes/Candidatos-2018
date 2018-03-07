@@ -240,7 +240,7 @@ function tec_get_poll_by_status($status,$location_sid){
 }
 
 // Funcion para obtener el porcentaje de votos
-function tec_get_percentage($candidate_sid,$status){
+function tec_get_percentage($candidate_sid,$status,$location_sid){
 	global $wpdb;
 	$query = "
 		SELECT ROUND(
@@ -249,10 +249,10 @@ function tec_get_percentage($candidate_sid,$status){
 				SELECT COUNT(*)
 				FROM candidate_vote_b
 				WHERE candidate_sid = $candidate_sid
-					AND poll_sid = (SELECT poll_id from poll_d WHERE status_sid = (SELECT status_id FROM status_a WHERE description = '$status'))
+					AND poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid )
 				) * 100
 		) / COUNT(*), 0) AS porcentaje
-		FROM candidate_vote_b WHERE poll_sid = (SELECT poll_id from poll_d WHERE status_sid = (SELECT status_id FROM status_a WHERE description = '$status'))
+		FROM candidate_vote_b WHERE poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid)
 	";
 	return $wpdb->get_results( $query, ARRAY_A );
 }

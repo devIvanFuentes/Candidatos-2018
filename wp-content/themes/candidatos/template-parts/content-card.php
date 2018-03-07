@@ -3,12 +3,14 @@
 	$candidate_sid = get_post_meta( $post_sid, 'category_sid', true );
 	$party_name = get_post_meta( $post_sid, 'party_name', true );
 	$category_url = get_post_meta( $post_sid, 'category_slug', true );
-	$porcentaje = tec_get_percentage($post_sid,'Activo');
+	
 	$party_sid = get_post_meta( $post_sid, 'second_featured_image', true );
 	$party_image = wp_get_attachment_thumb_url( $party_sid );
 	$location = wp_get_post_terms( $post_sid, 'locacion', $args );
 	// print_r($location);
 	$location_name = $location[0]->name;
+	$location_sid = tec_get_location_sid($location_name);
+	$porcentaje = tec_get_percentage($post_sid,'Activo',$location_sid[0]['term_id']);
 
 
 ?>
