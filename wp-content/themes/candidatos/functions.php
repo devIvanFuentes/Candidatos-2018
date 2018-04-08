@@ -134,6 +134,7 @@ function candidatos_scripts() {
 	wp_register_script( 'geodecoder', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
 
 
+
 	
 	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
 	$admin = array('ajax_url' => admin_url('admin-ajax.php') );
@@ -166,6 +167,29 @@ function candidatos_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
+
+function morris_script_home(){
+
+	if( is_front_page() ):
+
+		wp_register_style( 'morris-css', '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css', null, false, 'all' );
+		wp_register_script( 'raphael', '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js', array( 'jquery' ), false, false );
+		wp_register_script( 'morris', '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js', array( 'jquery', 'raphael' ), false, false );
+		wp_register_script( 'custom-morris', get_template_directory_uri().'/js/custom_morris.js', array( 'jquery', 'raphael','morris' ), false, false );
+
+		wp_enqueue_style( 'morris-css' );
+		wp_enqueue_script( 'raphael' );
+		wp_enqueue_script( 'morris' );
+		wp_enqueue_script( 'custom-morris' );
+
+	
+
+	endif;
+
+}
+
+add_action('wp_enqueue_scripts','morris_script_home');
 add_action( 'wp_enqueue_scripts', 'candidatos_scripts' );
 
 

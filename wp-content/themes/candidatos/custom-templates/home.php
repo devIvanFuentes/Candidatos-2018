@@ -81,8 +81,19 @@
 		
 
 		<?php 
-	 		echo do_shortcode('[mapsvg id="53"]');
+	 		// echo do_shortcode('[mapsvg id="53"]');
 	 	 ?>
+
+
+	 	 <div class="col s12">
+			<h4 class="center-align animated bounceInUp title">
+				Resultados otras encuestas
+			</h4>
+
+			<?php 
+				get_template_part( 'template-parts/content', 'vendor_poll' );
+			?>
+		</div>
 
 
 		
