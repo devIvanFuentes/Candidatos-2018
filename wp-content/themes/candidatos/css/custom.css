@@ -273,6 +273,11 @@ nav a, nav a:hover, nav a:visited {
 	cursor: pointer;
 }
 
+#btn__vote{
+	background: #be202d;
+	color: #fff;
+}
+
 
 /*Estilos para el post del candidato*/
 .candidateHeader{
@@ -311,16 +316,17 @@ nav a, nav a:hover, nav a:visited {
 	width: 100%;
 	display: flex;
 	align-self: flex-end;
-	justify-content: space-between;
-	align-content: center;
-	flex-wrap:wrap; 
+	justify-content: flex-start;
+	align-items: center;
+	/*flex-wrap:wrap; */
 	padding-left: 20px;
+	margin-bottom: 1em;
 }
 
 .candidateHeader__title{
 	color: #fff;
 	margin: 0;
-	padding: 0;
+	padding: 0 0 0 5px;
 }
 
 .candidateHeader__party{
@@ -458,7 +464,7 @@ nav a, nav a:hover, nav a:visited {
 #stickyPublicity{
 	width: 100%;
 	height: 250px;
-	background: red;
+	/*background: red;*/
 }
 /*End estilos candidatos relacionados*/
 

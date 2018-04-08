@@ -7,7 +7,7 @@ function dwwp_add_custom_metabox() {
 		__( 'API' ),
 		'dwwp_meta_callback',
 		'candidato',
-		'normal',
+		'side',
 		'core'
 	);
 
@@ -19,7 +19,8 @@ function dwwp_meta_callback( $post ) {
 	wp_nonce_field( basename( __FILE__ ), 'dwwp_jobs_nonce' );
 	$dwwp_stored_meta = get_post_meta( $post->ID ); ?>
 
-	<div>
+<div>
+
 		<div class="meta-row">
 			<div class="meta-th">
 				<label for="job-id" class="dwwp-row-title"><?php _e( 'Category ID', 'wp-job-listing' ); ?></label>
@@ -30,8 +31,9 @@ function dwwp_meta_callback( $post ) {
 					echo esc_attr( $dwwp_stored_meta['category_sid'][0] );
 				} ?>"/>
 			</div>
+			
 		</div>
-	</div>
+	
 
 	<div class="meta-row">
 			<div class="meta-th">
@@ -42,7 +44,7 @@ function dwwp_meta_callback( $post ) {
 				value="<?php if ( ! empty ( $dwwp_stored_meta['category_slug'] ) ) {
 					echo esc_attr( $dwwp_stored_meta['category_slug'][0] );
 				} ?>"/>
-			</div>
+			
 		</div>
 	</div>
 
@@ -58,8 +60,10 @@ function dwwp_meta_callback( $post ) {
 						echo esc_attr( $dwwp_stored_meta['party_name'][0] );
 					} ?>"/>
 				</div>
-			</div>
+			
 		</div>
+	
+</div>
 		
 		
 		

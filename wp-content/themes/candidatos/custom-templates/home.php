@@ -20,10 +20,7 @@
 	 <!-- <div id="vmap" style="width: 100%; height: 450px;"></div> -->
 
 
-	 	<?php 
-	 		echo do_shortcode('[mapsvg id="53"]');
-	 	 ?>
-
+	 	
 
 
 
@@ -34,7 +31,7 @@
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row candidatos__container">
 
 		<!-- Candidatos Nacionales -->
 		<?php  
@@ -66,7 +63,10 @@
 
 
 		?>
-		
+
+	</div>
+	
+	<div class="row">
 
 		<div class="col s12">
 			<h4 class="center-align animated bounceInUp title">
@@ -80,7 +80,10 @@
 		 ?>
 		
 
-		
+		<?php 
+	 		echo do_shortcode('[mapsvg id="53"]');
+	 	 ?>
+
 
 		
 			

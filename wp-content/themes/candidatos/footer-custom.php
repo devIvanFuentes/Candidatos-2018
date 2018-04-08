@@ -19,13 +19,14 @@
 			
 			<p>
 				
-				ADVERTENCIA: Esta encuesta es de opinión, los porcentajes mostrados solo pueden resultar un indicador de estados de ánimo o nivel de aceptación de un candidato al momento de recabar esta información. Los resultados pueden cambiar al momento de la elección.
+				ATENCIÓN: Esta encuesta es una opinión, los porcentajes mostrados solo podrían resultar un indicador del nivel de aceptación de un candidato al momento de recabar esta información. Los resultados podrían cambiar el día oficial de la elección.
 				
 			</p>
 
 			<p>
 				
-				Esta encuesta es 100% digital, sólo se podrá votar una vez a la semana por cada dirección IP. Los votos dobles o de otros estados serán anulados. Su voto es 100% confidencial y los datos proporcionados sólo serán usados con fines informativos. ¡Tu voto es secreto!
+				Esta encuesta es 100% confidencial y real. Solo se podrá votar una vez a la semana por cada dirección IP, los votos dobles serán anulados. Los datos proporcionados sólo serán usados con fines informativos.
+				<br>¡Tu voto es secreto!
 			</p>
 
 

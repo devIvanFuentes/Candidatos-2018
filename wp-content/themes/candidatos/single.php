@@ -7,7 +7,7 @@
  * @package candidatos
  */
 
-get_header('custom'); ?>
+get_header('candidate'); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">

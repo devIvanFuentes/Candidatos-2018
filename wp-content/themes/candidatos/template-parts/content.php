@@ -155,7 +155,16 @@ $term = $terms[0]->slug;
 			</div>
 
 			<div class="col s12 l4" id="stickyPublicity">
-				<p>Publicidad</p>		
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                        <!-- Seuno3 -->
+                                        <ins class="adsbygoogle"
+                                        style="display:block"
+                                        data-ad-client="ca-pub-1507048971343506"
+                                        data-ad-slot="7896730270"
+                                        data-ad-format="auto"></ins>
+                                        <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script> 		
 			</div>
 		</div>
 	

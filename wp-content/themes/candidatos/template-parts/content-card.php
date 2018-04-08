@@ -17,7 +17,7 @@
 <div class="col s12 m6 l3">
 
 			<div class="candidate hoverable animated fadeIn">
-				<div class="candidate__image" style=" background-image: url( <?php the_post_thumbnail_url( 'post-thumbnail' ); ?> ); ">
+				<div class="candidate__image" onclick="location.href=' <?php the_permalink(); ?> ';" style=" background-image: url( <?php the_post_thumbnail_url( 'post-thumbnail' ); ?> ); ">
 					
 					<figure class="candidate__party__image">
 						<img src="<?php echo $party_image; ?>">
@@ -59,7 +59,7 @@
 
 				<div class="candidate__actions">
 					<div class="candidate__more__container">
-						<a candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+						<a style="padding: 5px 20px;" candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
 							Votar
 						</a>
 						

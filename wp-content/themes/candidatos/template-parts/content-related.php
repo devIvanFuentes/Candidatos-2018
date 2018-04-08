@@ -1,6 +1,11 @@
 <?php 
 	$post_sid = get_the_ID(); 
-	$porcentaje = tec_get_percentage($post_sid,'Activo'); 
+	// $porcentaje = tec_get_percentage($post_sid,'Activo');
+	$location = wp_get_post_terms( $post_sid, 'locacion', $args );
+	// print_r($location);
+	$location_name = $location[0]->name;
+	$location_sid = tec_get_location_sid($location_name);
+	$porcentaje = tec_get_percentage($post_sid,'Activo',$location_sid[0]['term_id']); 
 ?>
 <div class="related__card hoverable">
 				<figure>

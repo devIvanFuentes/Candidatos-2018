@@ -13,33 +13,33 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta name="twitter:card" content="summary_large_image">
-  	<meta name="twitter:site" content="@seunonoticias">
-  	<meta name="twitter:creator" content="@seunonoticias">
-  	<meta name="twitter:title" content="Elecciones 2018 SéunoNoticias">
-  	<!-- <meta name="twitter:description" content="Vota por <?php echo the_title(); ?> en la encuesta de #SéUnoNoticias"> -->
-  	<!-- <meta name="twitter:image" content="<?php echo the_post_thumbnail_url(); ?>"> -->
-
-  	<!-- <meta name="description" content="Vota por <?php echo the_title(); ?> en la encuesta de #SéUnoNoticias"> -->
-  	<meta property="og:title" content="Elecciones 2018 SéunoNoticias" />
-  	<meta property="og:type" content="website" />
-  	<meta property="og:url" content="<?php echo the_permalink(  ); ?>" />
-  	<!-- <meta property="og:image" content="<?php echo the_post_thumbnail_url(); ?>"> -->
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67207764-2"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67207764-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-	  gtag('config', 'UA-67207764-2');
-	</script>
+  gtag('config', 'UA-67207764-2');
+</script>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	
 
 	<?php wp_head(); ?>
+	<meta name="twitter:card" content="summary_large_image">
+  	<meta name="twitter:site" content="@seunonoticias">
+  	<meta name="twitter:creator" content="@seunonoticias">
+  	<meta name="twitter:title" content="Elecciones 2018 SéunoNoticias">
+  	<meta name="twitter:description" content="Vota por <?php echo the_title(); ?> en la encuesta de #SéUnoNoticias">
+  	<!-- <meta name="twitter:image" content="<?php echo the_post_thumbnail_url(); ?>"> -->
+
+  	<meta name="description" content="Vota por <?php echo the_title(); ?> en la encuesta de #SéUnoNoticias">
+  	<meta property="og:title" content="Elecciones 2018 SéunoNoticias" />
+  	<meta property="og:type" content="website" />
+  	<meta property="og:url" content="<?php echo the_permalink(  ); ?>" />
+  	<!-- <meta property="og:image" content="<?php echo the_post_thumbnail_url(); ?>"> -->
 </head>
 
 <body <?php body_class(); ?>>

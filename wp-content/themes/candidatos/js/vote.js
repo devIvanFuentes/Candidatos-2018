@@ -152,7 +152,7 @@ jQuery(document).ready(function( $ ) {
 	               	}else{
 	               		swal(
   							'Lo sentimos',
-  							'Ya votaste en esta encuesta regresa la proxima semana',
+  							'Ya votaste en esta encuesta, podrás votar nuevamente la próxima semana',
   							'error'
 						).then((result)=>{
 							swal({

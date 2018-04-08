@@ -124,16 +124,22 @@ function candidatos_scripts() {
 	wp_register_style( 'fontastic', 'https://file.myfontastic.com/mBECXfgiPWRQmkgkFoU4sc/icons.css', false, 'all' );
 	wp_register_style( 'sweet-css', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.min.css', false, 'all' );
 	wp_register_style( 'ticker', get_template_directory_uri().'/css/ticker.css', false, 'all' );
+	wp_register_style( 'owl', get_template_directory_uri().'/css/owl.carousel.min.css', false, 'all' );
+	wp_register_style( 'owl-default', get_template_directory_uri().'/css/owl.theme.default.min.css', false, 'all' );
 	
 	wp_register_script( 'sweet-js', 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'materialize-js', get_template_directory_uri().'/js/materialize.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'init', get_template_directory_uri().'/js/init.js', array( 'jquery' ), false, false );
 	wp_register_script( 'ticker-js', get_template_directory_uri().'/js/jquery.tickerNews.min.js', array( 'jquery' ), false, false );
 	wp_register_script( 'geodecoder', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJjJuxDUNuzvKvlDdUIxV1qfq--eH_iU', array( 'jquery' ), false, false );
+
+
 	
 	wp_register_script( 'vote', get_template_directory_uri().'/js/vote.js', array( 'jquery','sweet-js' ), false, false );
 	$admin = array('ajax_url' => admin_url('admin-ajax.php') );
 	wp_localize_script( 'vote', 'url', $admin );
+	// wp_register_script( 'owl-js', get_template_directory_uri().'/js/owl.carousel.min.js', array( 'jquery','sweet-js' ), false, false );
+
 	
 	wp_enqueue_script( 'geodecoder' );
 	wp_enqueue_script( 'ticker-js' );
@@ -143,6 +149,7 @@ function candidatos_scripts() {
 	wp_enqueue_script( 'init' );
 	wp_enqueue_script( 'vote' );
 	wp_enqueue_script( 'sweet-js' );
+	// wp_enqueue_script( 'owl-js' );
 	
 	wp_enqueue_style( 'candidatos-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'materialize-css' );
@@ -152,6 +159,8 @@ function candidatos_scripts() {
 	wp_enqueue_style( 'fontastic' );
 	wp_enqueue_style( 'sweet-css' );
 	wp_enqueue_style( 'ticker' );
+	wp_enqueue_style( 'owl' );
+	wp_enqueue_style( 'owl-default' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -545,7 +554,8 @@ function tec_get_candidate_votes_by_municipality($candidate_sid,$poll_sid){
 		FROM candidate_vote_b
 		WHERE candidate_sid = $candidate_sid
 			AND poll_sid = $poll_sid
-		GROUP BY user_state
+		GROUP BY user_municipality
+		ORDER BY total DESC
 	";
 
 	return $wpdb->get_results( $query, OBJECT );
@@ -563,4 +573,11 @@ function tec_change_logo_url($html){
 	$replace = sprintf( '<a target="_blank" href="%s"', esc_url( $new_logo_url ) );
 
 	return str_replace( $search, $replace, $html );	
+}
+
+add_action( 'pre_get_posts', 'generate_random_category_posts' );
+function generate_random_category_posts( $query ) {
+if ( $query->is_main_query() ) {
+	$query->set( 'orderby', 'rand' );
+	}
 }

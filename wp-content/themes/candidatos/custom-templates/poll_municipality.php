@@ -28,8 +28,8 @@
         			foreach($states as $state):
         		?>
           		<tr>
-        			<td><?php echo $state->user_municipality; ?></td>
         			<td><?php echo $state->user_state; ?></td>
+        			<td><?php echo $state->user_municipality; ?></td>
         			<td><?php echo $state->total; ?></td>
         			
           		</tr>
