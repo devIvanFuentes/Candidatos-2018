@@ -55,7 +55,15 @@
 			if( $filter_posts->have_posts() ):
 				while( $filter_posts->have_posts() ):
 					$filter_posts->the_post();
-					get_template_part( 'template-parts/content', 'card' );
+					$post_sid = get_the_ID();
+					$party_name = get_post_meta( $post_sid, 'party_name', true );
+					
+					if( $party_name == 'ninguno' ):
+						get_template_part( 'template-parts/content', 'nobody' );
+					else:
+						get_template_part( 'template-parts/content', 'card' );
+					endif;
+				
 				endwhile;
 			endif;
 			
