@@ -282,10 +282,10 @@ function tec_get_percentage($candidate_sid,$status,$location_sid){
 				SELECT COUNT(*)
 				FROM candidate_vote_b
 				WHERE candidate_sid = $candidate_sid
-					AND poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid )
+					AND poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid and status_sid = $status )
 				) * 100
 		) / COUNT(*), 0) AS porcentaje
-		FROM candidate_vote_b WHERE poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid)
+		FROM candidate_vote_b WHERE poll_sid = (SELECT poll_id from poll_d WHERE location_sid = $location_sid and status_sid = $status)
 	";
 	return $wpdb->get_results( $query, ARRAY_A );
 }

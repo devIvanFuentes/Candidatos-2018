@@ -10,7 +10,7 @@
 	// print_r($location);
 	$location_name = $location[0]->name;
 	$location_sid = tec_get_location_sid($location_name);
-	$porcentaje = tec_get_percentage($post_sid,'Activo',$location_sid[0]['term_id']);
+	$porcentaje = tec_get_percentage($post_sid,1,$location_sid[0]['term_id']);
 
 
 ?>
@@ -59,14 +59,14 @@
 
 				<div class="candidate__actions">
 					<div class="candidate__more__container">
-						<a style="padding: 5px 20px;" candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+						<a style="padding: 5px 20px;" candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote full__btn">
 							Votar
 						</a>
 						
 					</div>
 
 					<div class="candidate__more__container">
-						<a href=" <?php echo $category_url; ?> " target="_blank" class="icon-newspaper candidate__more__news">
+						<a href=" <?php echo $category_url; ?> " target="_blank" class="icon-newspaper candidate__more__news full__btn">
 							Más notas
 						</a>
 						
