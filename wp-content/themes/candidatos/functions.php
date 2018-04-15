@@ -507,8 +507,18 @@ function tec_add_chart(){
 		// wp_enqueue_script( 'map' );
 	endif;
 }
-
 add_action( 'wp_enqueue_scripts', 'tec_add_chart');
+
+function tec_add_countdown(){
+
+	if( is_single() ):
+		wp_register_script( 'countdown', get_bloginfo('template_url').'/js/contador.js' , array( 'jquery' ), false, false );
+		wp_enqueue_script( 'countdown' );
+	
+
+	endif;
+}
+add_action( 'wp_enqueue_scripts', 'tec_add_countdown');
 
 
 

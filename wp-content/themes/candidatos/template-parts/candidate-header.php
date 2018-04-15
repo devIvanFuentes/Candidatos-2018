@@ -38,7 +38,8 @@
 
 		<div class="candidateHeader__statics">
 			<h5>Últimos resultados de la encuesta</h5>
-			<p>Encuesta del <?php echo $date[0]['start_date']; ?> al <?php echo $date[0]['end_date']; ?> </p>
+			<!-- <p>Encuesta del <?php echo $date[0]['start_date']; ?> al <?php echo $date[0]['end_date']; ?> </p> -->
+			<div id="countdown"></div>
 			<div class="candidateHeader__progress">
 				
 				

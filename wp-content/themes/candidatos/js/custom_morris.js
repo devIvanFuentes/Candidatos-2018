@@ -38,5 +38,17 @@ jQuery(document).ready(function( $ ) {
     labels: ['Andres Manuel', 'Ricardo Anaya', 'José Meade', 'Margarita Zavala','No sabe']
   });
 
+
+ Morris.Line({
+  element: 'linechart',
+  data: [
+    { y: '2018-04-01', a: 0, b: 0,c:0,d:0,e:0 },
+    { y: '2018-04-08', a: 57, b: 11,c:23,d:7,e:2 }
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b','c','d','e'],
+ labels: ['Andres Manuel', 'Ricardo Anaya', 'José Meade', 'Margarita Zavala','No sabe']
+});
+
  
 });

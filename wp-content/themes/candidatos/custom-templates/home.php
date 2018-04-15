@@ -18,12 +18,14 @@
 	</div>
 	 -->
 	 <!-- <div id="vmap" style="width: 100%; height: 450px;"></div> -->
-
+	<!-- 
 	<div class="col s12">
+
 		<h4 class="center-align animated bounceInUp title">Elecciones 2018 #SéUnoNoticias</h4>
 		<h5 class="center-align animated bounceInUp title">Si esta semana fueran las elecciones, ¿Por qué candidato votarías?</h5>
 	</div>
 
+	 -->
 	 	
 
 
@@ -139,6 +141,10 @@
 
 			<?php 
 				get_template_part( 'template-parts/content', 'vendor_poll' );
+			?>
+
+			<?php  
+				get_template_part( 'template-parts/content','line_poll');
 			?>
 		</div>
 
