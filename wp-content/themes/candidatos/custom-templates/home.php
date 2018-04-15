@@ -19,6 +19,10 @@
 	 -->
 	 <!-- <div id="vmap" style="width: 100%; height: 450px;"></div> -->
 
+	<div class="col s12">
+		<h4 class="center-align animated bounceInUp title">Elecciones 2018 #SéUnoNoticias</h4>
+		<h5 class="center-align animated bounceInUp title">Si esta semana fueran las elecciones, ¿Por qué candidato votarías?</h5>
+	</div>
 
 	 	
 
@@ -31,7 +35,7 @@
 </div>
 
 <div class="container">
-	<div class="row candidatos__container">
+	<div class="row desktop__candidate">
 
 		<!-- Candidatos Nacionales -->
 		<?php  
@@ -58,11 +62,7 @@
 					$post_sid = get_the_ID();
 					$party_name = get_post_meta( $post_sid, 'party_name', true );
 					
-					if( $party_name == 'ninguno' ):
-						get_template_part( 'template-parts/content', 'nobody' );
-					else:
-						get_template_part( 'template-parts/content', 'card' );
-					endif;
+					get_template_part( 'template-parts/content', 'card' );
 				
 				endwhile;
 			endif;
@@ -72,6 +72,45 @@
 
 		?>
 
+	</div>
+
+	<div class="row movile__candidate">
+
+		<!-- Candidatos Nacionales -->
+		<?php  
+			
+
+			$args = array(
+					'post_type'		=>	'candidato',
+					'orderby' 		=> 	'rand',
+					'tax_query' 	=> 	array(
+						array(
+							'taxonomy'	=>	'locacion',
+							'field'		=>	'slug',
+							'terms'		=>	'nacional',
+							'operator'	=>	'IN'
+						)
+
+					)	
+				);
+			
+			$filter_posts = new WP_Query($args); 
+			if( $filter_posts->have_posts() ):
+				while( $filter_posts->have_posts() ):
+					$filter_posts->the_post();
+					$post_sid = get_the_ID();
+					$party_name = get_post_meta( $post_sid, 'party_name', true );
+					
+					get_template_part( 'template-parts/content', 'related' );
+				
+				endwhile;
+			endif;
+			
+			wp_reset_postdata(); 
+
+
+		?>
+		
 	</div>
 	
 	<div class="row">

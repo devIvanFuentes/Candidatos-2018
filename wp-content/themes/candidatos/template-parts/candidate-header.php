@@ -5,7 +5,7 @@
 	// print_r($location);
 	$location_name = $location[0]->name;
 	$location_sid = tec_get_location_sid($location_name);
-	$porcentaje = tec_get_percentage($post_sid,'Activo',$location_sid[0]['term_id']);
+	$porcentaje = tec_get_percentage($post_sid,1,$location_sid[0]['term_id']);
 	$party_sid = get_post_meta( $post_sid, 'second_featured_image', true );
 	$party_image = wp_get_attachment_thumb_url( $party_sid );
 
@@ -54,23 +54,23 @@
 			</div>
 
 			<div class="candidate__actions candidateHeader-actions">
-					<div class="candidate__more__container candidate__more__container-header">
+					<div class="candidate__more__container full_container">
 						<!-- 
 						<a candidate-url=" <?php the_permalink(); ?> " candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
 							Votar
 						</a>
 						 -->
 
-						 <a style="padding: 5px 20px;" candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote">
+						 <a style="padding: 5px 20px;" candidate-url=" <?php the_permalink(); ?>" location-name="<?php echo $location_name; ?>"  candidate-sid="<?php echo $post_sid; ?>" id="btn__vote" class="icon-like candidate__more__news btn__vote full__btn">
 							Votar
 						</a>
 						
 					</div>
 
-					<div class="candidate__share-header">
+					<!-- <div class="candidate__share-header">
 						<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink();  ?>" class="icon-facebook-circled"> </a>
 						<a onclick="window.open(this.href, 'newwindow', 'width=600, height=600'); return false;" target="_blank" href="https://twitter.com/home?status=<?php the_permalink();  ?>" class="icon-twitter-circled"></a>	
-					</div>
+					</div> -->
 
 
 					

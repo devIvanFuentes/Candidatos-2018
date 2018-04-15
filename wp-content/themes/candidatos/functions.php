@@ -327,7 +327,8 @@ function tec_get_poll_dates($status){
 				SELECT status_id
 				FROM status_a
 				WHERE description = '$status'
-				);
+				)
+		AND location_sid = 2;
 
 	";
 

@@ -71,11 +71,10 @@ $term = $terms[0]->slug;
 				
 				<?php
 				  
-
 					$args = array(
+							'post__not_in' 	=>	array( $post_sid ),
 							'orderby' => 'rand',
 							'posts_per_page' => 2,
-							'post__not_in' 	=>	array( $post_sid ),
 							'post_type'		=>	'candidato',
 							'tax_query' 	=> 	array(
 								array(
@@ -116,14 +115,13 @@ $term = $terms[0]->slug;
 			
 			<div class="related" >
 				<div class="sub-title">
-					<h5>Conoce a los candidatos</h5>
+					<h5>Vota por los candidatos</h5>
 				</div>
 
 				<?php
 				  
-
+					// 'post__not_in' 	=>	array( $post_sid )
 					$args = array(
-							'post__not_in' 	=>	array( $post_sid ),
 							'post_type'		=>	'candidato',
 							'tax_query' 	=> 	array(
 								array(
@@ -154,9 +152,22 @@ $term = $terms[0]->slug;
 				
 			</div>
 
+			<div class="col s12 l4" id="regularPublicity">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Seuno3 -->
+                    <ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-1507048971343506"
+						data-ad-slot="7896730270"
+						data-ad-format="auto"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+                	</script> 		
+			</div>	
+
 			<div class="col s12 l4" id="stickyPublicity">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                        <!-- Seuno3 -->
+					<!-- Seuno3 -->
                                         <ins class="adsbygoogle"
                                         style="display:block"
                                         data-ad-client="ca-pub-1507048971343506"
